@@ -80,16 +80,17 @@
             position: relative;
         }
 
+        /* Background translucent logo setup (Enhanced Visibility) */
         .hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(11, 11, 14, 0.5) 0%, rgba(11, 11, 14, 1) 90%), url('logo.png.webp');
+            /* Gradient ko thoda light kiya hai aur image ko smooth dark gradient me embed kiya hai */
+            background: radial-gradient(circle at center, rgba(11, 11, 14, 0.2) 0%, rgba(11, 11, 14, 0.95) 100%), url('logo.png.webp');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 400px;
-            filter: grayscale(30%);
-            opacity: 0.15;
+            background-size: 500px; /* Logo thoda bada kiya hai taaki clear dikhe */
+            opacity: 0.45; /* Opacity ko 15% se badha kar 45% kar diya hai taaki logo saaf pta chale */
             z-index: 1;
         }
 
