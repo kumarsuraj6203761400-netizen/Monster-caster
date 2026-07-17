@@ -1,1 +1,485 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster | Professional BGMI Esports Caster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #0b0b0e;
+            --card-bg: #13131a;
+            --accent-color: #ff2a5f;
+            --text-color: #ffffff;
+            --text-muted: #a0a0b0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(11, 11, 14, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 42, 95, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(11, 11, 14, 0.5) 0%, rgba(11, 11, 14, 1) 90%), url('logo.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 400px;
+            filter: grayscale(30%);
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            font-weight: 900;
+            z-index: 2;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(255, 42, 95, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 35px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 42, 95, 0.4);
+        }
+
+        .btn:hover {
+            background-color: #e01f4f;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 42, 95, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--text-color);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            background: var(--card-bg);
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-color);
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 42, 95, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .exp-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 42, 95, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .exp-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .exp-card h4 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exp-card .org {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .exp-card .badge {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 42, 95, 0.2);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            min-width: 250px;
+            flex: 1;
+            border: 1px solid rgba(255, 42, 95, 0.05);
+        }
+
+        .contact-item h5 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: #070709;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 42, 95, 0.1);
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero::before { background-size: 250px; }
+            .hero h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">MONSTER<span>.</span></div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">Story</a>
+            <a href="#casting">Latest Casting</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>I AM <span>MONSTER</span></h1>
+        <p>Professional BGMI Esports Caster with 1.4+ Years of Experience across T2 Tournaments, Scrims, Online, and LAN Events.</p>
+        <div class="hero-btns">
+            <a href="#casting" class="btn">Watch Latest Casting</a>
+            <a href="https://www.instagram.com/p/DZhRW4kuko_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="btn btn-secondary">Instagram Profile</a>
+        </div>
+    </section>
+
+    <section class="container" id="about">
+        <h2 class="section-title">How I Started Casting</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>The Spark</h3>
+                <p>I began my esports journey as a streamer. After watching OceanSharma, I became deeply inspired by professional casting and decided to try it myself.</p>
+                <p>From my very first attempt, casting felt completely natural and exciting. It motivated me to continue driving forward, sharpen my voice, and break into the professional competitive circuit.</p>
+                <h3>Career Objective</h3>
+                <p style="border-left: 3px solid var(--accent-color); padding-left: 15px; font-style: italic;">
+                    "Aspiring to become an official esports caster and represent top-tier BGMI events with high-quality commentary and analysis."
+                </p>
+            </div>
+            
+            <div class="about-text" id="skills">
+                <h3>Core Competencies</h3>
+                <ul class="skills-list">
+                    <li>BGMI Play-by-Play & Color Commentary</li>
+                    <li>T2, Tournament & Scrims Casting</li>
+                    <li>LAN & Online Event Casting</li>
+                    <li>Team & Player Analysis</li>
+                    <li>Hindi / Hinglish Commentary</li>
+                    <li>Audience Engagement & Match Hype Creation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="casting" style="border-top: 1px solid rgba(255, 42, 95, 0.05); text-align: center;">
+        <h2 class="section-title">Latest Casting VOD</h2>
+        <p id="video-title" style="color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem;">Currently showing active or most recent stream</p>
+        
+        <div class="video-container">
+            <iframe id="yt-player" src="https://www.youtube.com/embed/live_stream?channel=UCt-X4cpx-D9G4_K1y66_QzA" title="Monster Latest Casting" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        
+        <a id="yt-channel-btn" href="https://www.youtube.com/live/uE8eVJyaTpA?si=Y1zUWaJEMCfMDrdn" target="_blank" class="btn">Watch on YouTube</a>
+    </section>
+
+    <section class="container" id="experience" style="border-top: 1px solid rgba(255, 42, 95, 0.05);">
+        <h2 class="section-title">Casting Experience</h2>
+        <div class="exp-grid">
+            
+            <div class="exp-card">
+                <span class="badge">Active</span>
+                <h4>Esports Caster</h4>
+                <div class="org">RMC Esports</div>
+                <p>Currently working as a professional caster analyzing top-tier matches.</p>
+            </div>
+
+            <div class="exp-card">
+                <h4>LAN Casting Experience</h4>
+                <div class="org">Elbus Esports</div>
+                <p>Delivered offline, high-intensity environment commentary managing live venue crowds.</p>
+            </div>
+
+            <div class="exp-card">
+                <h4>Tournament Casting</h4>
+                <div class="org">ViralApp</div>
+                <p>Handled action-packed T2 tournament rosters and intense match break-downs.</p>
+            </div>
+
+            <div class="exp-card">
+                <h4>Scrims Casting</h4>
+                <div class="org">Nexus Esports</div>
+                <p>Maintained everyday competitive match hype while providing tier-level strategy analysis.</p>
+            </div>
+
+            <div class="exp-card">
+                <h4>Tournament Casting</h4>
+                <div class="org">Ragdoll Gaming</div>
+                <p>Focused on fast-paced color commentary and tracking rotation highlights.</p>
+            </div>
+
+            <div class="exp-card">
+                <h4>Tournament Casting</h4>
+                <div class="org">Joy Bangla Esports</div>
+                <p>Built extensive audience engagement across community-driven competitive circuits.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="container" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-details">
+            <div class="contact-item">
+                <h5>Mobile</h5>
+                <p>+91 9006609719</p>
+            </div>
+            <div class="contact-item">
+                <h5>Email</h5>
+                <p>shaansingh94u@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <h5>Location</h5>
+                <p>Patna, India</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.youtube.com/live/uE8eVJyaTpA?si=Y1zUWaJEMCfMDrdn" target="_blank">Monster Poter YT</a>
+            <a href="https://www.instagram.com/p/DZhRW4kuko_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Instagram</a>
+        </div>
+        <p>&copy; 2026 Monster. Built for the Grind.</p>
+    </footer>
+
+</body>
+</html>
